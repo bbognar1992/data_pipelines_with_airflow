@@ -13,13 +13,13 @@ default_args = {
     'depends_on_past': False,
     'retries': 3,
     'retry_delay': timedelta(minutes=5), 
-    'email_on_retry': False
+    'email_on_retry': False,
+    'catchup': False
 }
 
 dag = DAG('sparkify_dag',
           default_args=default_args,
-          schedule_interval='@daily',
-          catchup=False
+          schedule_interval='@hourly'
         )
 
 start_operator = DummyOperator(task_id='Begin_execution',  dag=dag)
